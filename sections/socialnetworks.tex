@@ -1,6 +1,14 @@
 \section{Social Networks Models}
 \label{social_networks}
 
+Field of social network analysis become one of the key field in  computer science's interdisciplinary research, so before introducing what kind of properties have been observed in real social network we have to briefly describe typical metrics and measurements used in social network analysis:
+\begin{description}
+\item [Grade] defined as the number of links (or relationships) to others that a network's node have\cite{newman:2010}. In networks represented as directed graph \emph{in-degree} and \emph{out-degree} are used to numerate incoming and outgoing links respectively. Grade one of the basic measure in social network analysis, but also keep a relevant role when the focus is on distribution of degree across nodes.
+\item [Clustering] we can define clustering coefficient for a generic node $n_{i}$ as $\frac{number of pairs of neighbors of node_{i} that are connected}{number of pairs of neighbors of node_{i}}$. A whole network clustering coefficient could be calculated as $C=\frac{1}{n} \sum_{i=0}^{n} C_{i}$ \cite{watts1998cds}
+\item [Avg.Path Length]
+\item [Centrality]
+\end{description}
+
 %TODO talk about network metrics (grade, clustering, path length, centrality)
 
 \section{Small-World network}
