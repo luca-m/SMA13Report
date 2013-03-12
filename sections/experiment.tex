@@ -1,30 +1,52 @@
 \section{The Experiment}
 \label{experiment}
 
-%Occorre utilizzare un simulatore che supporti sia i concetti di mobilità
-%che 
-%ne di topologia sociale in maniera da modellare correttamente il dominio
-%di riferimento (nodi mobili, rete opportunistica e rete sociale).
+The goal of this section is to explain the experiment with all technical detail needed, from adopted models to results through scenarios and measures.\\
+First of all experiment aims to measure efficiency of several forwarding algorithm in an infrastructure free scenario, where mobile nodes are able to interact with others only in a limited local area around them. \\
+We measure forwarding algorithm performance in terms of:
+\begin{list}{}
+\item \emph{Delivery ratio}: $ \dfrac{number of messages delivered}{ number of messages sent } $ 
+\item \emph{Delivery cost}:  $ \dfrac{number of in-flight messages }{ number of messages sent } $
+\end{list}
+Delivery ratio could range from $0$ to $1$, and we are interested in the maximum delivery ratio value obtained through all simulation time. We care about maximum value in the all time span because we are simulating an opportunistic delay tolerant network. For delivery cost we consider it's maximum value (cost peek), it's average value and it's variance across the simulation time, and the correlation with delivery ratio.\\ 
+
+\subsection{Models and algorithms}
+\label{exp_incarnation}
+Since experiment needs to simulate a realistic contact network dynamics, we based our simulation on the community based mobility model introduced in section\ref{mobility_community_based_model} which is able to reproduce credible human-compatible interaction traces. In order to use this tool we had to generate a social-network to feed the mobility model algorithm.\\
+For this reason we choose to adopt the caveman enhanced network model described in section\ref{sn_caveman} where community structures are first class concept.\\
+Also we implement a subset of the forwarding algorithm described in\ref{forwarding}, both social-based and non-social ones; in detail we ran experiment with the following forwarding algorithms:
+\begin{itemize}
+\item \emph{Flood}, which is the most effective algorithm (but also the most expensive in terms of message copies)
+\item \emph{Label}, which exploit node's interests and consequential community patterns.
+\item \emph{Rank}, where nodes popularity lead forwarding decisions.
+\item \emph{Bubble}, where both node's interest and popularity are exploited according to algorithm\ref{r_bubble_alg}.
+\end{itemize}
 
 \subsection{Simulation platform}
 \label{exp_platform}
 
-%Il punto di partenza che è stato al momento individuato prevede l'utilizzo
-%di /Alchemist/ come base per le simulazioni. Il simulatore supporta già 
-%mobilità dei nodi e generazione di rete opportunistica. Inoltre può 
-%risultare interessante la metafora chimica per la definizione di 
-%regole di comportamento locali.
+We decide to use a simulation platform that lessen the abstraction gap between the conceptual space of our experiment and the platform abstractions. In detail our experiment mainly involves two concepts mobile nodes and social networks. Since we think supporting mobility simulation is generally harder than supporting social network simulations we choose to adopt the \emph{Alchemist} simulation platform\cite{pianini-jos2013} because it has been explicitly designed to handle nodes mobility and contact networks.\\
+A part of the class project work has been allocated in the extension of the Alchemist platform in order to: 
+\begin{itemize}
+\item integrate the concept of social network and enable simulation on arbitrary topologies.
+\item design a mechanism which permit to define arbitrary network formation algorithm (aka auto-linking)\footnote{Alchemist use an auto-linking euclidean rule (based on euclidean distance) for determining when a mobile node has a neighbourhood relationship with another one}.
+\item support environment with multiple networking layers. For instance support an euclidean environment with mobile nodes that links each others based on their physical distance, and at the same time support the concept social neighbourhood, or in general another linking layer based on other - non euclidean - criteria.
+\end{itemize}
 
-\subsection{Platform incarnation and algorithms}
-\label{exp_incarnation}
+With this extensions we are fully enabled to run the experiment described above, which exploits only a small part of the expressive power of this extension.\\
+In fact adding a social networking conceptual space to alchemist's domain may enable simulations on social network formation and dynamics by simulating contacts and interactions between mobile nodes in several environmental conditions.\\
 
-% 2. Supporto a generazione di reti random e/o scale-free (quindi
-%    supporto a simulazioni su tali topologie) 
-% 3. Supporto di ambienti ibridi: nodi mobili con relazioni di vicinato
-%    opportunistiche insieme a relazioni sociali
 
-\subsection{Experiment setup}
+\subsubsection{Experiment set-up}
 \label{exp_setup}
+
+In order to obtain a significant statistical base we set-up 2 experimental session:
+\begin{itemize}
+\item First one composed by 100 runs for each forwarding algorithm with 60 mobile nodes\footnote{Datasets used for emulations in\cite{bubble} provide traces of a number of mobile devices between 40 and 100 units} distributed in 6 communities and 16 message to deliver (uniformly distributed across nodes population), each time with a randomized\footnote{We used the built-in Mersenne Twister algorithm provided by simulation platform} initial configuration in terms of relationship between mobile users and consequential contact traces.
+\item Second one with the same characteristics of the previous except for the number of message to deliver: 100 per run. 
+\end{itemize} 
+
+
 
 % 4. realizzazione di mobility model basato su community
 % 5. Simulazione di un algoritmo "bubble rap -like", misura di delivery
