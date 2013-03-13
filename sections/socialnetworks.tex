@@ -11,8 +11,8 @@ Field of social network analysis become one of the key field in  computer scienc
 \item \emph{Degree Centrality}, which simply consider node's degree (as described previously)
 \item \emph{Betweenness}, focus on how much a node is between other nodes, in particular can be defined as $ \frac{\sum_{j<k}{g_{jk}(i)}}{g_jk }$ where $g_{jk}$ is the number of shortest paths connecting $jk$ and
 $g_{jk}(i)$ is the number that shortest path which includes node $i$.
-\item \emph{Eigenvector centrality}, it exploits different concept, this measure consider node centrality directly related to neighbours centralities\cite{newman:2010} (eg. if you have important neighbours you are much more important). It can be intuitively expressed as $C(i)=\sum_{k \in neighborhood}{\omega_{ki} \cdot C(k)}$ where $\omega_{ki}$ is the weight of the relationship (if present) and $C(\cdot)$ is the centrality.
-\emph{Katz centrality} is a refinement of eigenvector centrality which enable to modulate the effect of neighbours centrality in node's centrality calculation. More formally we can express node-$i$ centrality as $C_{i}(\beta)= \sum_{j \in neighborhood}{(\alpha + \beta \cdot C_{j})\cdot \omega_{ij}}$ where $\beta$ is modulates the importance of neighbours centrality and $\alpha$ is a normalized constant.
+\item \emph{Eigenvector centrality} it exploits different concept, this measure consider node centrality directly related to neighbours centralities\cite{newman:2010} (eg. if you have important neighbours you are much more important). It can be intuitively expressed as $C(i)=\sum_{k \in neighborhood}{\omega_{ki} \cdot C(k)}$ where $\omega_{ki}$ is the weight of the relationship (if present) and $C(\cdot)$ is the centrality.
+\item \emph{Katz centrality} is a refinement of eigenvector centrality which enable to modulate the effect of neighbours centrality in node's centrality calculation. More formally we can express node-$i$ centrality as $C_{i}(\beta)= \sum_{j \in neighborhood}{(\alpha + \beta \cdot C_{j})\cdot \omega_{ij}}$ where $\beta$ is modulates the importance of neighbours centrality and $\alpha$ is a normalized constant.
 \end{itemize}
 \end{description}
 
@@ -28,7 +28,7 @@ The common properties observed during investigations were fundamental for the de
 \item[Scale-free] degree distribution across network nodes follow a power-law such as $p(x) \sim x^{-\gamma}$ where $\gamma$ is a parameter typically between 2 and 3. An important property of this kind of distribution (which is an exponential distribution) is that it results to be scale invariant. Note that a distribution is scale invariant if $p(b \cdot x) = f(b) p(x)$, and if we consider a power-law distribution $p(c \cdot x) = (c \cdot x)^\gamma = c^\gamma f(x) \propto p(x)$.\\ 
 Power-law distribution is also known as \emph{Pareto distribution} (80/20 principle) so roughly speaking we can observe that there are much more nodes with low-degree values rather than high-degree nodes.
 
-\item[Community structures] real world networks are typically characterized by high\footnote{High clustering coefficient - and also low average path - are referred to the same measures taken from random graphs (eg. Erdos–Renyi model) } clustering coefficient's values, in fact fully connected sub-graphs (k-cliques) are a common motif in small-world networks\cite{citeulike:481248}. A recent analysis performed on data collected by an ad hoc massive multiplayer online game\cite{citeulike:6926207} have observed that high values of clustering were observed in case of positive interactions, showing a correlation between communities and performance.
+\item[Community structures] real world networks are typically characterized by high\footnote{High clustering coefficient - and also low average path - are referred to the same measures taken from random graphs (eg. Erdos–Renyi model) } clustering coefficient's values, in fact fully connected sub-graphs (k-cliques) are a common motif in small-world networks\cite{citeulike:481248}. A recent analysis performed on data collected by an ad hoc massive multiplayer online game\cite{citeulike:6926207} have observed that high values of clustering are related to positive interactions, showing a correlation between communities and performance.
 
 \end{description}
 
@@ -36,7 +36,8 @@ Power-law distribution is also known as \emph{Pareto distribution} (80/20 princi
 \label{sn_ba_model}
 BA model\cite{citeulike:90557} is a network model based on two concept observable in real networks: growth, and preferential attachment. Older nodes become more popular during network growth and consequentially it's more probable that new nodes will be attach to them.\\
 The algorithm consider degree as measure of popularity and use a probability of attachment calculated as follow: $p_{i} = \frac{k_{i}}{\sum_{j} k_{j}}$, where $p_i$ is the probability of creation of a connection (edge) between the new node and the node-$i$, $k_{i}$ is the node-$i$ degree, and $j \in 1 \cdots N$.\\
-However BA-generated network does not provide a full small-word network, despite the scale-free ($p(x)=x^[-3]$) degree distribution and the relatively low average short path ($\ell\sim\frac{\ln N}{\ln \ln N}. $), it doesn't capture typical motifs of real world networks: high clustering values and communities, in fact in BA-model the clustering coefficient scales with network size in a power-law fashion. This behaviour is still different from small-world networks where clustering is independent of graph size.
+However BA-generated network does not provide a full small-word network. Despite the scale-free ($p(x)=x^{-3}$) degree distribution and the relatively low average short path ($\ell\sim\frac{\ln N}{\ln \ln N}. $), it doesn't capture typical motifs of real world networks: high clustering values and communities.\\
+In fact in BA-model the clustering coefficient scales with network size in a power-law fashion, this behaviour is still different from small-world networks where clustering is independent from graph size.
 
 \begin{algorithm}
 \caption{BA network generation algorithm}
@@ -53,7 +54,8 @@ However BA-generated network does not provide a full small-word network, despite
 
 \subsection{Watt-Strogatz model}
 \label{sn_ws_model}
-The WS-model\cite{citeulike:1580006} use a different approach for describing the small-world networks formation, it exploits a different concept related to observation of both random, regular, and small-world networks: considering the structure of small-word networks is possible to observe that they aren't neither regular nor random, so the main idea is to obtain a realistic network topology by moving from regular to random network by increasing randomness. In fact The algorithm consists in the creation of a regular lattice graph (with $K$ indicating the mean degree), and a successive random rewiring leaded by a probability of rewire $\beta$.
+The WS-model\cite{citeulike:1580006} use a different approach for describing the small-world networks formation, it exploits a different concept related to observation of both random, regular, and small-world networks.\\
+Considering the structure of small-word networks is possible to observe that they aren't neither regular nor random, so the main idea is to obtain a realistic network topology by moving from regular to random network by increasing randomness  in some way. The algorithm used for network generation\ref{sn_ws_alg} consists in two main steps: the creation of a regular lattice graph (with $K$ indicating the mean degree), and a successive random rewiring leaded by a probability of rewire $\beta$.
 
 \begin{algorithm}
 \caption{WS network generation algorithm}
@@ -73,12 +75,14 @@ The WS-model\cite{citeulike:1580006} use a different approach for describing the
 \end{algorithmic}
 \end{algorithm}
 
-This model generates network with logarithmic average path length, a clustering coefficient which depends on $K$ (not on size of graph), but does not generate a realistic - scale-free - degree distribution.
+This model generates networks with logarithmic average path length, a clustering coefficient which depends on $K$ (not on size of graph), but does not generate a realistic - scale-free - degree distribution.
 
 \subsection{Caveman model}
 \label{sn_caveman_model}
-Another interesting network model proposed in\cite{4149781} consist in a refinement of the classical caveman model, which is based on a set of connected sub-graphs wired each other in a regular lattice as shown in figure \ref{fig:caveman}. Once generated the base caveman graph, further random rewiring will be performed in a distinct way w.r.t. WS-model.\\
-This model use the \emph{``s-metric''} as probability of rewiring: this measures the propensity of high-degree nodes to connect to other high-degree nodes, it is defined as $s(graph)=\sum_{i,j \in graph}{k_{i} \cdot k_{j}} $. Whereas a probability is needed this measure is used for normalizing single node's s-value, so probability of rewiring results in $p(i,j) =\frac{k_{i} \cdot k_{j}}{\sum_{u,v \in graph, u \neq v}{k_{u} \cdot k_{v}}}$ with $i,j \in graph$, $i \neq j$.\\
+Another interesting network model proposed in\cite{4149781} consists in a refinement of the classical caveman model, which is based on a set of connected sub-graphs wired each other in a regular lattice as shown in figure \ref{fig:caveman}.\\
+ Once generated the base caveman graph, further random rewiring will be performed in a distinct way w.r.t. WS-model.\\
+This model use the \emph{``s-metric''} as probability of rewiring: this metric aim to quantify the propensity of high-degree nodes to connect to other high-degree nodes, it is defined as $s(graph)=\sum_{i,j \in graph}{k_{i} \cdot k_{j}} $, where $k_{i}$ is the node-$i$ degree.\\
+Whereas a probability is needed, this measure is used for normalizing single node's \emph{``s-value''}, so probability of rewiring results in $p(i,j) =\frac{k_{i} \cdot k_{j}}{\sum_{u,v \in graph, u \neq v}{k_{u} \cdot k_{v}}}$ with $i,j \in graph$, $i \neq j$.\\
 
 \begin{figure}[h!]
 	\begin{center}
@@ -107,4 +111,4 @@ This model use the \emph{``s-metric''} as probability of rewiring: this measures
 \end{algorithmic}
 \end{algorithm}
 
-This model can generate network with an high clustering coefficient, relatively low average shortest path, and - as reported in\cite{4149781} - with sufficient network size, a degree distribution very similar to power law distribution.
+This model can generate networks with a high clustering coefficient, relatively low average shortest path, and - as reported in\cite{4149781} - with sufficient network size, a degree distribution very similar to power law distribution.

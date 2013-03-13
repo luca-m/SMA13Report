@@ -6,15 +6,15 @@ The goal of this section is to explain the experiment with all technical detail 
 First of all experiment aims to measure efficiency of several forwarding algorithm in an infrastructure free scenario, where mobile nodes are able to interact with others only in a limited local area around them. \\
 We measure forwarding algorithm performance in terms of:
 \begin{list}{}
-\item \emph{Delivery ratio}: $ \dfrac{number of messages delivered}{ number of messages sent } $ 
-\item \emph{Delivery cost}:  $ \dfrac{number of inflight messages }{ number of messages sent } $
+\item \emph{Delivery ratio}: $ \dfrac{Number Of Messages Delivered}{ Number Of Messages Sent } $ 
+\item \emph{Delivery cost}:  $ \dfrac{Number Of Inflight Messages }{ Number Of Messages Sent } $
 \end{list}
 Delivery ratio could range from $0$ to $1$, and we are interested in the maximum delivery ratio value obtained through all simulation time. We care about maximum value in the all time span because we are simulating an opportunistic delay tolerant network. For delivery cost we consider it's maximum value (cost peek), it's average value and it's variance across the simulation time, and the correlation with delivery ratio.\\ 
 
 \subsection{Models and algorithms}
 \label{exp_incarnation}
 Since experiment needs to simulate a realistic contact network dynamics, we based our simulation on the community based mobility model introduced in section\ref{mobility_community_based_model} which is able to reproduce credible human-compatible interaction traces. In order to use this tool we had to generate a social-network to feed the mobility model algorithm.\\
-For this reason we choose to adopt the caveman enhanced network model described in section\ref{sn_caveman} where community structures are first class concept.\\
+For this reason we choose to adopt the caveman enhanced network model described in section\ref{sn_caveman_model} where community structures are first class concept.\\
 Also we implement a subset of the forwarding algorithm described in\ref{forwarding}, both social-based and non-social ones; in detail we ran experiment with the following forwarding algorithms:
 \begin{itemize}
 \item \emph{Flood}, which is the most effective algorithm (but also the most expensive in terms of message copies)
@@ -26,7 +26,8 @@ Also we implement a subset of the forwarding algorithm described in\ref{forwardi
 \subsection{Simulation platform}
 \label{exp_platform}
 
-We decide to use a simulation platform that lessen the abstraction gap between the conceptual space of our experiment and the platform abstractions. In detail our experiment mainly involves two concepts mobile nodes and social networks. Since we think supporting mobility simulation is generally harder than supporting social network simulations we choose to adopt the \emph{Alchemist} simulation platform\cite{pianini-jos2013} because it has been explicitly designed to handle nodes mobility and contact networks.\\
+We decide to use a simulation platform that lessen the abstraction gap between the conceptual space of our experiment and the platform abstractions. In detail our experiment mainly involves two main concepts: mobile nodes and social networks.\\
+Since we think supporting mobility simulation is generally harder than supporting social network simulations we choose to adopt the \emph{Alchemist} simulation platform\cite{pianini-jos2013} because it has been explicitly designed to handle nodes mobility and contact networks.\\
 A part of the class project work has been allocated in the extension of the Alchemist platform in order to: 
 \begin{itemize}
 \item Integrate the concept of social network and enable simulation on arbitrary topologies.
@@ -46,12 +47,12 @@ In order to obtain a significant statistical base we set-up 2 experimental sessi
 \item First one composed by 100 runs for each forwarding algorithm with 60 mobile nodes\footnote{Datasets used for emulations in\cite{bubble} provide traces of a number of mobile devices between 40 and 100 units} distributed in 6 communities and 16 message to deliver (uniformly distributed across nodes population), each time with a randomized\footnote{We used the built-in Mersenne Twister algorithm provided by simulation platform} initial configuration in terms of relationship between mobile users and consequential contact traces.
 \item Second one with the same characteristics of the previous except for the number of message to deliver: 100 per run. 
 \end{itemize} 
-In these experiments we set-up all messages at configuration time, so every sender start delivering from the beginning of the simulation. This configuration make sense if we assume that the stochastic process we are simulating is ergodic, under this assumption we might consider the simulation as a valid time sample of the behaviour of the system under specified load (in terms of message to deliver in a time span).\\
-
+In these experiments we set-up all messages at configuration time, so every sender start delivering from the beginning of the simulation. This configuration make sense if we assume that the stochastic process we are simulating is ergodic, under this assumption we might consider the simulation as a valid time sample of the behaviour of the system under the specified load (in terms of message to deliver in a time span).\\
+In figure \ref{fig:bubble_live_init} and \ref{fig:bubble_live} are represented environment and nodes in a simulation demo.
 \begin{figure}[h!]
 	\begin{center}
-    \label{fig:bubble_live_init}
     \includegraphics[scale=0.25]{img/bubble_live_init.png}
+    \label{fig:bubble_live_init}
     \caption{Simulation initial configuration. Green lines represent social relationship while blue (shorter) lines physical links.}
   \end{center}
 \end{figure}
@@ -67,9 +68,10 @@ In these experiments we set-up all messages at configuration time, so every send
 \subsection{Results}
 \label{exp_results}
 
-Simulation results have shown similar motifs with respect to emulation performed in\cite{bubble}, but values does not perfectly fit each others. This difference could be caused by the load assumptions performed and the time span considered. In fact in\cite{bubble} time span considered is 3 ($1814400 sec$) week large, with a presumable node velocity of $1\sim1.5 \frac{m}{sec^{-1}}$, instead simulated experiments range within 7 hours ($\sim 25000 sec$). So the 1000 message of the emulation are spread in a larger time span, with an average ratio of $5.5\cdot 10^{-4}$, while the 100 messages of the simulation are cumulated in a smaller time interval, with average ratio of $4\cdot 10^{-3}$. This mean a more stressed system.\\
-Also for having a value fitness between this two approach a further simulation parameter tuning must be performed, for example a finest set-up of nodes speed (and consequentially to the node movement reaction rate\footnote{Alchemist is based on chemical metaphor, so reactions (conditions and actions) happens with the specified rate}) or the rate of the reactions that lead choice of stay in an area or move to another one.\\
-However results are also pretty interesting because reveal similar patterns and led to the same efficiency conclusions. Collected data of each experiment's run have been aggregated per time-interval, in other words we made an average of each run's measurement in each time sub-interval (one point on these graphs represent the average value measured for all the runs within the time interval considered). In addition we performed some classical statistic on un-aggregated data.\\
+Simulation results have shown similar motifs with respect to emulation performed in\cite{bubble}, but values does not perfectly fit each others. This difference could be caused by the load assumptions performed and the time span considered.\\
+In fact in\cite{bubble} time span considered is 3 ($1814400 sec$) week large, with a presumable node velocity of $1\sim1.5 \frac{m}{sec^{-1}}$, instead simulated experiments range within 7 hours ($\sim 25000 sec$). So the 1000 message of the emulation are spread in a larger time span, with an average ratio of $5.5\cdot 10^{-4}$, while the 100 messages of the simulation are cumulated in a smaller time interval, with average ratio of $4\cdot 10^{-3}$. This mean a more stressed system.\\
+A simulation parameter tuning can be performed in order to refine experimental results: for example a finest set-up of nodes speed (and consequentially to the node movement reaction rate\footnote{Alchemist is based on chemical metaphor, so reactions (conditions and actions) happens with the specified rate}) or the rate of the reactions that lead choice of stay in an area or move to another one should lead to more precise results. However results are also pretty interesting because reveal similar patterns and led to the same efficiency conclusions.\\
+Collected data of each experiment's run have been aggregated per time-interval, in other words we made an average of each runs measurement in each time sub-interval (one point on these graphs represent the average value measured for all the runs within the time interval considered). In addition we performed some classical statistic on un-aggregated data.\\
 In figure ~\ref{fig:run_1_aggregate} ~\ref{fig:run_1_aggregate_noflood} and ~\ref{fig:run_2_aggregate} ~\ref{fig:run_2_aggregate_noflood} are represented delivery ratio and delivery cost of each algorithm during the simulation time (aggregated data).\\
 \newpage
 % Aggregated data session 1

@@ -15,7 +15,14 @@
 \usepackage{amsmath}
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage{appendix}
+\usepackage{color}
+\usepackage{listings}
 \usepackage[pdftex,bookmarks,colorlinks,pdfauthor={Luca Mella},pdftitle={Report-SMA1213}, pdftex]{hyperref}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
 
 \hypersetup{colorlinks=false}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -25,7 +32,7 @@
 
 \title{Simulating social-based forwarding in opportunistic networks}
 \author{Luca Mella - luca.mella@studio.unibo.it \\ SMA1213 Class Project Report \\ Alma Mater Studiorum -- University of Bologna \\ }
-\date{date}
+\date{\today}
 
 \maketitle
 
@@ -54,6 +61,16 @@
 \nocite{*}
 \bibliography{biblio}{}
 \bibliographystyle{plain} 
+
+\newpage
+\appendix
+\appendixpage 
+\section{Alchemist Repository}
+Alchemist master branch is reachable at \url{https://bitbucket.org/danysk/alchemist}, while the extensions developed during class project ( \emph{incarnation-socialnets} and \emph{plugin-socialnets}) are publicly available at \url{https://bitbucket.org/lucam/alchemist}.
+\section{Collected Data}
+Experimental session data are also available at \url{TBD}. 
+\section{Data Processing}
+\lstinputlisting[label=r_script, language=R, breaklines=true, basicstyle=\tiny ,commentstyle=\color{mygreen},numbers=left,deletekeywords={var,time,col,max,path,*,\$,t,file,<\-}, numberstyle=\tiny\color{mygray}, caption=R Script used for data processing and visualization]{snippet/simstats.R}
 
 \end{document}
 

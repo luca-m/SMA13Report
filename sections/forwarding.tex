@@ -12,12 +12,12 @@ We can individuate three canonical forwarding algorithm:
 \begin{description}
 \item[Wait] consists in merely holding the message until recipient is directed encountered. Pretty ineffective, but it provide a lower bound in term of both delivery cost and delivery ratio.
 \item[Flood] used also in several routing protocols (eg.OSPF) for network image construction, consists in a flooding through the entire system. Represent the upper bound in term of both delivery cost and delivery ratio.
-\item[MCP] \emph{Multiple-Copy-multiple-hoP}, it's a mix of the previous approach. Each node can forward only a predefined number of copies for each message; each message has also a TTL measured in Hops (like common IP packets). It represent a pretty efficient and effective forwarding scheme for naive algorithm.\end{description} 
+\item[MCP] \emph{Multiple-Copy-multiple-hoP}, it's a mix of the previous approach. Each node can forward only a predefined number of copies for each message; each message has also a TTL measured in Hops (like common IP packets). It represent a pretty efficient and effective forwarding scheme for naive algorithms.\end{description} 
 
 \subsection{Social-based algorithms}
 \label{f_social}
 Basic approaches introduced previously does not make any assumption on contact network so a newer set of forwarding algorithm have been studied in the last decade. \\
-Knowing that mobile nodes are carried by humans enable to make new assumptions that could be exploited in forwarding decisions. So we perform a qualitative survey on forwarding algorithm which exploit knowledge of social networks in order to show which kind of concepts and measures are considered in forwarding decision making:
+Knowing that mobile nodes are carried by humans enable us to make new assumptions that could be exploited in forwarding decisions, so we perform a qualitative survey on forwarding algorithm which exploit knowledge of social networks in order to show which kind of concepts and measures are considered in forwarding decision making:
 
 \subsubsection{Label algorithms}
 This approach exploit the human dimension of the problem, in fact messages are forwarded only to encountered nodes with the same (or also similar) interest of the recipient. This concept of similarity of interest is important because typically similar tends to stay close, in other words this forwarding algorithm exploit communities structures (eg. \emph{k-cliques}) which are characteristic of small-world networks.
@@ -26,9 +26,9 @@ Here the focus is on node centrality, this is the key measure considered in forw
 
 \subsubsection{Bubble algorithms}
 \label{f_bubble}
-Bubble algorithm\cite{bubble} family basically play with both with rank and labels, in order to enhance efficiency in terms of lessen in flight copies. The approach is pretty interesting due to it consider two level of ranking: a \emph{global ranking} which coincide with measure of centrality w.r.t. the whole network, and a \emph{local ranking} that instead consider centrality w.r.t. nodes in the same community.
-Then if mix these notions of rank with the community membership.\\
-The following algorithm's sketch\ref{r_bubble_alg} show how these elements are combined.
+Bubble algorithm\cite{bubble} family basically play with both with rank and labels, in order to enhance efficiency in terms of lessen in flight copies. The approach is pretty interesting due to it considers two level of ranking: a \emph{global ranking} which coincide with measure of centrality w.r.t. the whole network, and a \emph{local ranking} that instead consider centrality w.r.t. nodes in the same community.
+Successively it mixes these notions of rank with the community membership.\\
+The following algorithm's sketch\ref{r_bubble_alg} shows how these elements are combined.
 
 \begin{algorithm}
 \caption{Bubble RAP forwarding algorithm}
