@@ -34,7 +34,7 @@ Power-law distribution is also known as \emph{Pareto distribution} (80/20 princi
 
 \subsection{Barabási-Albert model}
 \label{sn_ba_model}
-BA model\cite{citeulike:90557} is a network model based on two concept observable in real networks: growth, and preferential attachment. Older nodes become more popular during network growth and consequentially it's more probable that new nodes will be attach to them.\\
+BA model\cite{citeulike:90557} is a network model based on two concepts observable in real networks: growth, and preferential attachment. Older nodes become more popular during network growth and consequentially it's more probable that new nodes will be attach to them.\\
 The algorithm consider degree as measure of popularity and use a probability of attachment calculated as follow: $p_{i} = \frac{k_{i}}{\sum_{j} k_{j}}$, where $p_i$ is the probability of creation of a connection (edge) between the new node and the node-$i$, $k_{i}$ is the node-$i$ degree, and $j \in 1 \cdots N$.\\
 However BA-generated network does not provide a full small-word network. Despite the scale-free ($p(x)=x^{-3}$) degree distribution and the relatively low average short path ($\ell\sim\frac{\ln N}{\ln \ln N}. $), it doesn't capture typical motifs of real world networks: high clustering values and communities.\\
 In fact in BA-model the clustering coefficient scales with network size in a power-law fashion, this behaviour is still different from small-world networks where clustering is independent from graph size.
@@ -54,7 +54,7 @@ In fact in BA-model the clustering coefficient scales with network size in a pow
 
 \subsection{Watt-Strogatz model}
 \label{sn_ws_model}
-The WS-model\cite{citeulike:1580006} use a different approach for describing the small-world networks formation, it exploits a different concept related to observation of both random, regular, and small-world networks.\\
+The WS-model\cite{citeulike:1580006} use a different approach for describing the small-world networks formation, it exploits a different concepts related to observation of both random, regular, and small-world networks.\\
 Considering the structure of small-word networks is possible to observe that they aren't neither regular nor random, so the main idea is to obtain a realistic network topology by moving from regular to random network by increasing randomness  in some way. The algorithm used for network generation\ref{sn_ws_alg} consists in two main steps: the creation of a regular lattice graph (with $K$ indicating the mean degree), and a successive random rewiring leaded by a probability of rewire $\beta$.
 
 \begin{algorithm}
