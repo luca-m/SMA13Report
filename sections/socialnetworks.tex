@@ -77,7 +77,7 @@ This model generates network with logarithmic average path length, a clustering 
 
 \subsection{Caveman model}
 \label{sn_caveman_model}
-Another interesting network model proposed in\cite{4149781} consist in a refinement of the classical caveman model, which is based on a set of connected sub-graphs wired each other in a regular lattice as shown in figure\ref{fig:caveman}. Once generated the base caveman graph, further random rewiring will be performed in a distinct way w.r.t. WS-model.\\
+Another interesting network model proposed in\cite{4149781} consist in a refinement of the classical caveman model, which is based on a set of connected sub-graphs wired each other in a regular lattice as shown in figure \ref{fig:caveman}. Once generated the base caveman graph, further random rewiring will be performed in a distinct way w.r.t. WS-model.\\
 This model use the \emph{``s-metric''} as probability of rewiring: this measures the propensity of high-degree nodes to connect to other high-degree nodes, it is defined as $s(graph)=\sum_{i,j \in graph}{k_{i} \cdot k_{j}} $. Whereas a probability is needed this measure is used for normalizing single node's s-value, so probability of rewiring results in $p(i,j) =\frac{k_{i} \cdot k_{j}}{\sum_{u,v \in graph, u \neq v}{k_{u} \cdot k_{v}}}$ with $i,j \in graph$, $i \neq j$.\\
 
 \begin{figure}[h!]
