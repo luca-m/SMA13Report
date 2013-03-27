@@ -1,29 +1,28 @@
 \section{Social Networks Models}
 \label{social_networks}
 
-Field of social network analysis become one of the key field in  computer science's interdisciplinary research, so before introducing what kind of properties have been observed in real social network we have to briefly describe typical metrics and measurements used in social network analysis:
+Field of \textit{Social Network Analysis} became one of the key field in computer science's interdisciplinary research, so before introducing what kind of properties have been observed in real social network we have to briefly describe typical metrics and measurements adopted in social network analysis:
 \begin{description}
-\item [Grade] defined as the number of links (or relationships) to others that a network's node have\cite{newman:2010}. In networks represented as directed graph \emph{in-degree} and \emph{out-degree} are used to numerate incoming and outgoing links respectively. Grade one of the basic measure in social network analysis, but also keep a relevant role when the focus is on distribution of degree across nodes.
-\item [Clustering] we can define clustering coefficient for a generic node $n_{i}$ as $\frac{number of pairs of neighbors of node_{i} that are connected}{number of pairs of neighbors of node_{i}}$. A whole network clustering coefficient could be calculated as $C=\frac{1}{n} \sum_{i=0}^{n} C_{i}$ \cite{citeulike:1580006}
-\item [Average path length], measure the efficiency of the network in terms of how easy is transport an information from a node to another. It is defined as $\frac{\sum_{i,j}{d(i,j)}}{n\cdot (n-1)}$ where $i,j$ are network nodes, $n$ is the number of network nodes and $d(\cdot,\cdot)$ is the shortest path cost between two nodes ($0$ in case of not reachability or $i=j$). 
-\item [Centrality] this kind of measures try to answer to the following question ``Which are the most important or central vertices in a network?''. Several kinds of centrality measures have been defined in order to characterize node's importance in the network, like:
+\item [Degree] defined as the number of links (or relationships) that a network node have\cite{newman:2010}. In networks represented as directed graph \emph{in-degree} and \emph{out-degree} are used to measure incoming and outgoing links respectively. Degree is one of the basic metrics in social network analysis and the study of it's distribution across nodes plays a relevant role in SNA.
+\item [Clustering] we can define clustering coefficient for a generic node $n_{i}$ as $\frac{number of pairs of neighbors of node_{i} that are connected}{number of pairs of neighbors of node_{i}}$. A whole network clustering coefficient could be calculated as $C=\frac{1}{n} \sum_{i=0}^{n} C_{i}$\cite{citeulike:1580006}. This measurement try to catch the node's tendency to form groups (more formally, completely connected sub-graphs).
+\item [Average path length] measure the efficiency of the network in terms of how easy is the transport of an information from a node to another. It is defined as $\frac{\sum_{i,j}{d(i,j)}}{n\cdot (n-1)}$ where $i,j$ are network nodes, $n$ is the number of network nodes and $d(\cdot,\cdot)$ is the shortest path cost between two nodes ($0$ in case of not reachability or $i=j$). 
+\item [Centrality] this kind of measures try to answer to the following question \textit{``Which are the most important nodes in a network?''}. Several kinds of centrality measures have been defined in order to characterize node's importance, like:
 \begin{itemize}
 \item \emph{Degree Centrality}, which simply consider node's degree (as described previously)
-\item \emph{Betweenness}, focus on how much a node is between other nodes, in particular can be defined as $ \frac{\sum_{j<k}{g_{jk}(i)}}{g_jk }$ where $g_{jk}$ is the number of shortest paths connecting $jk$ and
-$g_{jk}(i)$ is the number that shortest path which includes node $i$.
-\item \emph{Eigenvector centrality} it exploits different concept, this measure consider node centrality directly related to neighbours centralities\cite{newman:2010} (eg. if you have important neighbours you are much more important). It can be intuitively expressed as $C(i)=\sum_{k \in neighborhood}{\omega_{ki} \cdot C(k)}$ where $\omega_{ki}$ is the weight of the relationship (if present) and $C(\cdot)$ is the centrality.
-\item \emph{Katz centrality} is a refinement of eigenvector centrality which enable to modulate the effect of neighbours centrality in node's centrality calculation. More formally we can express node-$i$ centrality as $C_{i}(\beta)= \sum_{j \in neighborhood}{(\alpha + \beta \cdot C_{j})\cdot \omega_{ij}}$ where $\beta$ is modulates the importance of neighbours centrality and $\alpha$ is a normalized constant.
+\item \emph{Betweenness}, focus on how much a node is between other nodes, in particular can be defined as $ \frac{\sum_{j<k}{g_{jk}(i)}}{g_jk }$ where $g_{jk}$ is the number of shortest paths connecting $jk$ and $g_{jk}(i)$ is the number that shortest path which includes node $i$.
+\item \emph{Eigenvector centrality} exploits different concept, this measure consider node centrality directly related to neighbours centralities\cite{newman:2010} (eg. if you have important neighbours you are much more important). It can be intuitively expressed as $C(i)=\sum_{k \in neighborhood}{\omega_{ki} \cdot C(k)}$ where $\omega_{ki}$ is the weight of the relationship (if present) and $C(\cdot)$ is the centrality.
+\item \emph{Katz centrality} is a refinement of eigenvector centrality which enable to modulate the effect of neighbours centrality in node centrality calculation. More formally we can express node-$i$ centrality as $C_{i}(\beta)= \sum_{j \in neighborhood}{(\alpha + \beta \cdot C_{j})\cdot \omega_{ij}}$ where $\beta$ is modulates the importance of neighbours centrality and $\alpha$ is a normalized constant.
 \end{itemize}
 \end{description}
 
 \section{Small-World networks}
 \label{sn_smallworld}
-Real world network have been investigated deeply in past decades and similar characteristics have been observed in both biological, social, and computer networks (eg.web-pages or e-mails\cite{ebel02:_scale}). 
+Real world network have been deeply investigated in past decades and similar characteristics have been observed in both biological, social, and computer networks (eg.web-pages or e-mails\cite{ebel02:_scale}). 
 The common properties observed during investigations were fundamental for the development of networks models and consequential algorithm for realistic network generation - which are basic for setting up our experiment - so we need to introduce these properties:
 
 \begin{description}
 
-\item[Small-world property] real world networks are typically characterized  by the existence of shortcuts between different network areas, this contribute do maintain low average path length despite network size\cite{citeulike:481248}, speeding up the communication among otherwise distant nodes.
+\item[Small-world property] real world networks are typically characterized by the existence of short-cuts between different network areas, this contribute do maintain low average path length despite network size\cite{citeulike:481248} speeding up the communication among otherwise distant nodes.
 
 \item[Scale-free] degree distribution across network nodes follow a power-law such as $p(x) \sim x^{-\gamma}$ where $\gamma$ is a parameter typically between 2 and 3. An important property of this kind of distribution (which is an exponential distribution) is that it results to be scale invariant. Note that a distribution is scale invariant if $p(b \cdot x) = f(b) p(x)$, and if we consider a power-law distribution $p(c \cdot x) = (c \cdot x)^\gamma = c^\gamma f(x) \propto p(x)$.\\ 
 Power-law distribution is also known as \emph{Pareto distribution} (80/20 principle) so roughly speaking we can observe that there are much more nodes with low-degree values rather than high-degree nodes.
@@ -34,7 +33,7 @@ Power-law distribution is also known as \emph{Pareto distribution} (80/20 princi
 
 \subsection{Barabási-Albert model}
 \label{sn_ba_model}
-BA model\cite{citeulike:90557} is a network model based on two concepts observable in real networks: growth, and preferential attachment. Older nodes become more popular during network growth and consequentially it's more probable that new nodes will be attach to them.\\
+BA model\cite{citeulike:90557} is a network model based on two observable concepts of real networks: growth, and preferential attachment. Older nodes become more popular during network growth and consequentially it's more probable that new nodes will link to them.\\
 The algorithm consider degree as measure of popularity and use a probability of attachment calculated as follow: $p_{i} = \frac{k_{i}}{\sum_{j} k_{j}}$, where $p_i$ is the probability of creation of a connection (edge) between the new node and the node-$i$, $k_{i}$ is the node-$i$ degree, and $j \in 1 \cdots N$.\\
 However BA-generated network does not provide a full small-word network. Despite the scale-free ($p(x)=x^{-3}$) degree distribution and the relatively low average short path ($\ell\sim\frac{\ln N}{\ln \ln N}. $), it doesn't capture typical motifs of real world networks: high clustering values and communities.\\
 In fact in BA-model the clustering coefficient scales with network size in a power-law fashion, this behaviour is still different from small-world networks where clustering is independent from graph size.
@@ -55,7 +54,7 @@ In fact in BA-model the clustering coefficient scales with network size in a pow
 \subsection{Watt-Strogatz model}
 \label{sn_ws_model}
 The WS-model\cite{citeulike:1580006} use a different approach for describing the small-world networks formation, it exploits a different concepts related to observation of both random, regular, and small-world networks.\\
-Considering the structure of small-word networks is possible to observe that they aren't neither regular nor random, so the main idea is to obtain a realistic network topology by moving from regular to random network by increasing randomness  in some way. The algorithm used for network generation\ref{sn_ws_alg} consists in two main steps: the creation of a regular lattice graph (with $K$ indicating the mean degree), and a successive random rewiring leaded by a probability of rewire $\beta$.
+Considering the structure of small-word networks is possible to observe that they aren't neither regular nor random, so the main idea is to obtain a realistic network topology by moving from regular to random network by increasing randomness in some way. The algorithm used for network generation\ref{sn_ws_alg} consists in two main steps: the creation of a regular lattice graph (with $K$ indicating the mean degree), and a successive random rewiring leaded by a probability of rewire $\beta$.
 
 \begin{algorithm}
 \caption{WS network generation algorithm}
@@ -86,9 +85,9 @@ Whereas a probability is needed, this measure is used for normalizing single nod
 
 \begin{figure}[h!]
 	\begin{center}
-    \label{fig:caveman}
     \includegraphics[scale=0.5]{img/caveman.png}
-    \caption{Caveman network model (initial) with $m=5$ sub-groups}
+    \caption{Caveman network model (initial) with $m=5$ sub-groups in\cite{4149781} }
+    \label{fig:caveman}
   \end{center}
 \end{figure}
 

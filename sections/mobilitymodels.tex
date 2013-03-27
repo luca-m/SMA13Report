@@ -1,17 +1,17 @@
 \section{Mobility Models}
 \label{mobility_models}
 
-Mobility models are key aspect in simulations involving mobile users, in fact running an experiment where movements of nodes should generate a realistic contact network dynamic require some non trivial considerations.\\
-In order to reproduce credible contact networks we need to choose a mobility model which is able to reproduce human mobility patterns and dynamics, for this reason we can't use \emph{Brownian mobility models} and similar.\\
+Mobility models are key aspect in simulations that involves mobile users, in fact running an experiment where movements of nodes should generate a realistic contact network dynamic require some non trivial considerations.\\
+In order to reproduce credible contact networks we need to choose a mobility model which is able to simulate human mobility patterns and dynamics, for this reason we can't use \emph{Brownian mobility models} or similar.\\
 We focus on a community based model which exploit social network information\ref{mobility_community_based_model}, however we point out here\cite{Camp02asurvey} for an useful review of several types of mobility models.
 
 \section{Community Based Mobility Model}
 \label{mobility_community_based_model}
 
-In\cite{Musolesi:2006:CBM:1132983.1132990} is presented a particularly interesting mobility model wich explicitly use social-network for generating mobile users traces and contact network dynamics. \\
+In\cite{Musolesi:2006:CBM:1132983.1132990} is presented a particularly interesting mobility model which explicitly use social-network for generating mobile users traces and contact network dynamics.\\
 The model preface a simulation space subdivided in distinct areas, these squares are initially populated by communities found in the social-network provided as input, one community per area.\\
-At the same time each mobile user (node) is associated with a goal, in an agent based fashion, and initially each node desire to reach the square where it is.\\
-When a goal is reached, a new goal have to be chosen, and the concept of ``social attractivity'' of a place is introduced as follow: the place $S$ exerts a desirability to host $i$ proportional to the relationships between $i$ and the other hosts that belong to that particular square, normalized by the number of hosts present in $S$. \\
-More formally $ A(S,i) = \frac{ \sum_{j \in nodesIn(S)}{ \omega_{i,j}}  }{ \sum_{j \in nodesIn(S)}{j}  } $ where $S$ is the place, $i$ is the mobile user, $\omega$ is the relationship between $i$ and $j$ (can be the weight of the edge or ${0,1}$ in case of un-weighted graph).\\
-The new goal is then randomly chosen inside the square characterised by the highest desirability, so a node can decide to stay in the same place or move to a different one.\\
+At the same time each mobile user (node) is associated to a goal in an agent based fashion, and initially each node desires to reach the square where it is.\\
+When a goal is reached, a new goal have to be chosen, and the concept of ``social attractivity'' of a place is introduced as follow: the place $S$ exerts a desirability to node-$i$ proportional to the relationships between $i$ and the other nodes that belong to that particular square, normalized by the total number of nodes placed in $S$.\\ More formally $ A(S,i) = \frac{ \sum_{j \in nodesIn(S)}{ \omega_{i,j}}  }{ \sum_{j \in nodesIn(S)}{j}  } $ where $S$ is the place, $i$ is the mobile user (node), $\omega$ is the relationship between $i$ and $j$ (can be the edge weight or ${0,1}$ in case of un-weighted graph).\\ The new goal is then randomly chosen inside the square characterised by the highest desirability, so a node can decide to stay in the same place or move to a different one.\\
 Experimental results in \cite{Musolesi:2006:CBM:1132983.1132990} show that simulated inter-contacts times present a time distribution similar to real mobility traces. For this reason the community based mobility represent a good foundation for our experiment.
+
+% TODO: algorithm sketch ?
