@@ -1,7 +1,8 @@
 \section{Forwarding in opportunistic networks}
 \label{forwarding}
 
-Opportunistic networks are highly dynamical network, connections are not durable like internet ones and contact network can be characterized by more than one connected components dynamics, even without a giant connected component at all. For this reason forwarding decision might be not so oblivious and using traditional forwarding schemes might lead to limitations in terms of both efficiency and effectiveness. \\ In this section we describe several algorithms that could be used for forwarding a message in a dynamic, Delay Tolerant Network (DTN), with particular regards to algorithms that exploit network topology informations.
+Opportunistic networks are highly dynamical network, connections are not durable like internet ones and contact network can be characterized by more than one connected components dynamics, even without a giant connected component at all. For this reason forwarding decision might be not so oblivious and using traditional forwarding schemes might lead to limitations in terms of both efficiency and effectiveness.\\
+In this section we describe several algorithms that could be used for forwarding a message in a dynamic, Delay Tolerant Network (DTN), with particular regards to algorithms that exploit network topology informations.
 
 \subsection{Non social-based algorithms}
 \label{f_non_social}
@@ -45,12 +46,12 @@ The following algorithm's sketch\ref{r_bubble_alg} shows how these elements are 
 \end{algorithmic}
 \end{algorithm}
 
-In \cite{bubble} experimental results have shown that this forwarding strategy is effective like MCP (slightly less than flooding algorithm) but with a notable difference in term of delivery cost. In figure\ref{fig:bubblerap-performance} are reported the result of an experiment with two main communities.
+In \cite[6.1,6.2]{bubble} experimental results have shown that this forwarding strategy is effective like MCP (slightly less than flooding algorithm) but with a notable difference in term of delivery cost. In figure\ref{fig:bubblerap-performance} are reported the result of an experiment with two main communities.
 
 \begin{figure}[h!]
 	\begin{center}
-    \label{fig:bubblerap-performance}
     \includegraphics[scale=0.35]{img/bubblerap-performance.png}
-    \caption{Comparison of several algorithms in two-community experiment based on \emph{Haggle Project} data sets performed in\cite{bubble}}
-  \end{center}
+    \caption{Comparison of several algorithms in two-community experiment based on \emph{Cambridge dataset} data sets performed in\cite[Figure 14 on SOCIALNETS Deliverable D2.3]{bubble}}
+    \label{fig:bubblerap-performance}    
+    \end{center}
 \end{figure}

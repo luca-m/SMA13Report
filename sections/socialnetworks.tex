@@ -3,15 +3,21 @@
 
 Field of \textit{Social Network Analysis} became one of the key field in computer science's interdisciplinary research, so before introducing what kind of properties have been observed in real social network we have to briefly describe typical metrics and measurements adopted in social network analysis:
 \begin{description}
-\item [Degree] defined as the number of links (or relationships) that a network node have\cite{newman:2010}. In networks represented as directed graph \emph{in-degree} and \emph{out-degree} are used to measure incoming and outgoing links respectively. Degree is one of the basic metrics in social network analysis and the study of it's distribution across nodes plays a relevant role in SNA.
-\item [Clustering] we can define clustering coefficient for a generic node $n_{i}$ as $\frac{number of pairs of neighbors of node_{i} that are connected}{number of pairs of neighbors of node_{i}}$. A whole network clustering coefficient could be calculated as $C=\frac{1}{n} \sum_{i=0}^{n} C_{i}$\cite{citeulike:1580006}. This measurement try to catch the node's tendency to form groups (more formally, completely connected sub-graphs).
+\item [Degree] defined as the number of links (or relationships) that a network node have\cite[7.1]{newman:2010}. In networks represented as directed graph \emph{in-degree} and \emph{out-degree} are used to measure incoming and outgoing links respectively. Degree is one of the basic metrics in social network analysis and the study of it's distribution across nodes plays a relevant role in SNA.
+\item [Clustering] we can define clustering coefficient for a generic node $n_{i}$ as $\frac{number of pairs of neighbors of node_{i} that are connected}{number of pairs of neighbors of node_{i}}$. A whole network clustering coefficient could be calculated as $C=\frac{1}{n} \sum_{i=0}^{n} C_{i}$\cite[Figure 2 caption]{citeulike:1580006}. This measurement try to catch the node's tendency to form groups (more formally, completely connected sub-graphs).
 \item [Average path length] measure the efficiency of the network in terms of how easy is the transport of an information from a node to another. It is defined as $\frac{\sum_{i,j}{d(i,j)}}{n\cdot (n-1)}$ where $i,j$ are network nodes, $n$ is the number of network nodes and $d(\cdot,\cdot)$ is the shortest path cost between two nodes ($0$ in case of not reachability or $i=j$). 
 \item [Centrality] this kind of measures try to answer to the following question \textit{``Which are the most important nodes in a network?''}. Several kinds of centrality measures have been defined in order to characterize node's importance, like:
 \begin{itemize}
+
 \item \emph{Degree Centrality}, which simply consider node's degree (as described previously)
+
 \item \emph{Betweenness}, focus on how much a node is between other nodes, in particular can be defined as $ \frac{\sum_{j<k}{g_{jk}(i)}}{g_jk }$ where $g_{jk}$ is the number of shortest paths connecting $jk$ and $g_{jk}(i)$ is the number that shortest path which includes node $i$.
-\item \emph{Eigenvector centrality} exploits different concept, this measure consider node centrality directly related to neighbours centralities\cite{newman:2010} (eg. if you have important neighbours you are much more important). It can be intuitively expressed as $C(i)=\sum_{k \in neighborhood}{\omega_{ki} \cdot C(k)}$ where $\omega_{ki}$ is the weight of the relationship (if present) and $C(\cdot)$ is the centrality.
-\item \emph{Katz centrality} is a refinement of eigenvector centrality which enable to modulate the effect of neighbours centrality in node centrality calculation. More formally we can express node-$i$ centrality as $C_{i}(\beta)= \sum_{j \in neighborhood}{(\alpha + \beta \cdot C_{j})\cdot \omega_{ij}}$ where $\beta$ is modulates the importance of neighbours centrality and $\alpha$ is a normalized constant.
+
+\item \emph{Eigenvector centrality} exploits different concept, this measure consider node centrality directly related to neighbours centralities\cite[7.2]{newman:2010} (eg. if you have important neighbours you are much more important). It can be intuitively expressed as $C(i)=\sum_{k \in neighborhood}{\omega_{ki} \cdot C(k)}$ where $\omega_{ki}$ is the weight of the relationship (if present) and $C(\cdot)$ is the centrality.
+
+\item \emph{Katz centrality} is a refinement of eigenvector centrality which enable to modulate the effect of neighbours centrality in node centrality calculation. More formally we can express node-$i$ centrality as $C_{i}(\beta)= \sum_{j \in neighborhood}{(\alpha + \beta \cdot C_{j})\cdot \omega_{ij}}$ where $\beta$ is modulates the importance of neighbours centrality and $\alpha$ is a normalized constant. However this kind of centrality have an undesired side-effect: if an high degree vertex point to several (eg.millions) low degree ones they also get high centrality values, of course this behaviour is not properly realistic\cite[7.4]{newman:2010}.
+
+\item \emph{PageRank centrality} tries to overcome to Katz centrality misbehaviour by modulating the contribution of the neighbours with the their out degree. So we can refine previous centrality expression like that: $C_{i}(\beta)= \sum_{j \in neighborhood}{(\alpha + \beta \cdot \frac{C_{j}}{k_{j}^{out}} )\cdot \omega_{ij}}$.
 \end{itemize}
 \end{description}
 
@@ -22,12 +28,12 @@ The common properties observed during investigations were fundamental for the de
 
 \begin{description}
 
-\item[Small-world property] real world networks are typically characterized by the existence of short-cuts between different network areas, this contribute do maintain low average path length despite network size\cite{citeulike:481248} speeding up the communication among otherwise distant nodes.
+\item[Small-world property] real world networks are typically characterized by the existence of short-cuts between different network areas, this contribute do maintain low average path length despite network size\cite[2.2.1]{citeulike:481248} speeding up the communication among otherwise distant nodes.
 
 \item[Scale-free] degree distribution across network nodes follow a power-law such as $p(x) \sim x^{-\gamma}$ where $\gamma$ is a parameter typically between 2 and 3. An important property of this kind of distribution (which is an exponential distribution) is that it results to be scale invariant. Note that a distribution is scale invariant if $p(b \cdot x) = f(b) p(x)$, and if we consider a power-law distribution $p(c \cdot x) = (c \cdot x)^\gamma = c^\gamma f(x) \propto p(x)$.\\ 
 Power-law distribution is also known as \emph{Pareto distribution} (80/20 principle) so roughly speaking we can observe that there are much more nodes with low-degree values rather than high-degree nodes.
 
-\item[Community structures] real world networks are typically characterized by high\footnote{High clustering coefficient - and also low average path - are referred to the same measures taken from random graphs (eg. Erdos–Renyi model) } clustering coefficient's values, in fact fully connected sub-graphs (k-cliques) are a common motif in small-world networks\cite{citeulike:481248}. A recent analysis performed on data collected by an ad hoc massive multiplayer online game\cite{citeulike:6926207} have observed that high values of clustering are related to positive interactions, showing a correlation between communities and performance.
+\item[Community structures] real world networks are typically characterized by high\footnote{High clustering coefficient - and also low average path - are referred to the same measures taken from random graphs (eg. Erdos–Renyi model) } clustering coefficient's values, in fact fully connected sub-graphs (k-cliques) are a common motif in small-world networks\cite[2.1.5]{citeulike:481248}. A recent analysis performed on data collected by an ad hoc massive multiplayer online game\cite{citeulike:6926207} have observed that high values of clustering are related to positive interactions, showing a correlation between communities and performance.
 
 \end{description}
 
@@ -110,4 +116,4 @@ Whereas a probability is needed, this measure is used for normalizing single nod
 \end{algorithmic}
 \end{algorithm}
 
-This model can generate networks with a high clustering coefficient, relatively low average shortest path, and - as reported in\cite{4149781} - with sufficient network size, a degree distribution very similar to power law distribution.
+This model can generate networks with a high clustering coefficient, relatively low average shortest path, and - as reported in\cite[4]{4149781} - with sufficient network size, a degree distribution very similar to power law distribution.
