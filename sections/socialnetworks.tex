@@ -17,7 +17,7 @@ Field of \textit{Social Network Analysis} became one of the key field in compute
 
 \item \emph{Katz centrality} is a refinement of eigenvector centrality which enable to modulate the effect of neighbours centrality in node centrality calculation. More formally we can express node-$i$ centrality as $C_{i}(\beta)= \sum_{j \in neighborhood}{(\alpha + \beta \cdot C_{j})\cdot \omega_{ij}}$ where $\beta$ is modulates the importance of neighbours centrality and $\alpha$ is a normalized constant. However this kind of centrality have an undesired side-effect: if an high degree vertex point to several (eg.millions) low degree ones they also get high centrality values, of course this behaviour is not properly realistic\cite[7.4]{newman:2010}.
 
-\item \emph{PageRank centrality} tries to overcome to Katz centrality misbehaviour by modulating the contribution of the neighbours with the their out degree. So we can refine previous centrality expression like that: $C_{i}(\beta)= \sum_{j \in neighborhood}{(\alpha + \beta \cdot \frac{C_{j}}{k_{j}^{out}} )\cdot \omega_{ij}}$.
+\item \emph{PageRank centrality} tries to overcome to Katz centrality misbehaviour by modulating the contribution of the neighbours with the their out degree. So we can enhance previous centrality expression adding a $k_{j}^{out}$ term which represent the out-degree of node-$j$, resulting in $C_{i}(\beta)= \sum_{j \in neighborhood}{(\alpha + \beta \cdot \frac{C_{j}}{k_{j}^{out}} )\cdot \omega_{ij}}$.
 \end{itemize}
 \end{description}
 

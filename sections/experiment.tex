@@ -41,12 +41,12 @@ In fact adding a social networking conceptual space to alchemist's domain may en
 \subsubsection{Experiment set-up}
 \label{exp_setup}
 
-In order to obtain a significant statistical base we set-up 2 experimental session:
+We set-up two experimental session with initial parameters inspired from \cite[6.2]{bubble}:
 \begin{itemize}
-\item First one composed by 100 runs for each forwarding algorithm with 60 mobile nodes\footnote{Datasets used for emulations in\cite{bubble} provide traces of a number of mobile devices between 40 and 100 units} distributed in 6 communities and 16 message to deliver (uniformly distributed across nodes population), each time with a randomized\footnote{We used the built-in Mersenne Twister algorithm provided by simulation platform} initial configuration in terms of relationship between mobile users and consequential contact traces.
-\item Second one with the same characteristics of the previous except for the number of message to deliver: 100 per run. 
+\item First one composed by 100 runs for each forwarding algorithm with 60 mobile nodes\footnote{Datasets used for emulations in\cite{bubble} provide traces of a number of mobile devices between 40 and 100 units, so system size is comparable} distributed in 6 communities and 16 message to deliver (uniformly distributed across nodes population), each time with a randomized\footnote{We used the built-in Mersenne Twister algorithm provided by simulation platform} initial configuration in terms of relationship between mobile users and consequential contact traces.
+\item Second one with the same characteristics of the previous except for the number of message to deliver: 100 messages per run. 
 \end{itemize}
-In these experiments we set-up all messages at configuration time, so every sender start delivering from the beginning of the simulation. This configuration make sense if we assume that the stochastic process we are simulating is ergodic, under this assumption we might consider the simulation as a valid time sample of the behaviour of the system under the specified load (in terms of message to deliver in a time span).\\
+In these experiments we set-up all messages at configuration time, so every sender start delivering from the beginning of the simulation. This configuration make sense if we assume that the stochastic process we are simulating is ergodic, under this assumption we might consider the simulation as a valid time sample of the behaviour of the system under the specified load (in terms of message to deliver in a time span). Further consideration on chosen initial parameters are argued in section \ref{exp_results_discussion}.\\
 In figure \ref{fig:bubble_live_init} and \ref{fig:bubble_live} are represented environment and nodes in the simulation demo running on Alchemist.
 \begin{figure}[h!]
 	\begin{center}
@@ -65,11 +65,12 @@ In figure \ref{fig:bubble_live_init} and \ref{fig:bubble_live} are represented e
 
 \newpage
 \subsubsection{Original Experiment}
+\label{exp_original}
 In honour of completeness we briefly report emulation parameters and measurements reported in\cite[Table 3,6.2]{bubble}. The reference experiment - based on \emph{Reality data set} - involves 73 nodes subdivided in 8 communities (average size $\sim 9$) and a simulation time of 3 weeks. In figure \ref{fig:reality_emulation} are shown delivery ratio and cost measured during simulations.
 \begin{center}
 \begin{figure}[h!]
     		\includegraphics[scale=0.35]{img/reality_emulation.png}
-    		\caption{Comparison of several algorithm performance reported in \cite{bubble} with \emph{Reality data set}. Figures \emph{a} and \emph{b} shows delivery ratio and cost respectively}
+    		\caption{Comparison of several algorithm performance reported in \cite{bubble} with \emph{Reality data set}. Figures \emph{(a)} and \emph{(b)} shows delivery ratio and cost respectively}
     		\label{fig:reality_emulation}
 \end{figure}
 \end{center}
@@ -78,25 +79,33 @@ In honour of completeness we briefly report emulation parameters and measurement
 \subsection{Results}
 \label{exp_results}
 
-Simulation results have shown similar motifs with respect to emulation performed in\cite{bubble} and reported in figure\ref{fig:reality_emulation}, but values does not perfectly fit each others in term of absolute values. In fact we might note social based algorithm have lower delivery cost with respect to classical ones (eg. MCP in fig.\ref{fig:reality_emulation} and Flood in our experiments, fig.\ref{fig:run_1_aggregate}) and bubble algorithm has higher delivery ratio with respect to other social based algorithms.\\
-The value difference could be caused by the load assumptions performed and the time span considered.\\
-In fact in\cite[6.2]{bubble} time span considered is 3 week large ($1814400 sec$), with a presumable node velocity of $1\sim1.5 \frac{m}{sec^{-1}}$, instead simulated experiments range within 7 hours ($\sim 25000 sec$). So the 1000 message of the emulation are spread in a larger time span, with an average ratio of $5.5\cdot 10^{-4}$, while the 100 messages of the simulation are cumulated in a smaller time interval, with average ratio of $4\cdot 10^{-3}$. This mean a more stressed system.\\
-Further simulation parameter tuning can be performed in order to refine experimental results: for example a finest set-up of nodes speed (and consequentially to the node movement reaction rate\footnote{Alchemist is based on chemical metaphor, so reactions (conditions and actions) happens with arbitrary rate}) or the rate of the moving decision's reactions should lead to more precise results. However results are also pretty interesting because reveal similar algorithms characteristics and led to the same efficiency conclusions.\\
-Collected data of each experiment's run have been aggregated per time-interval, in other words we made an average of each runs measurement in each time sub-interval (one point on these graphs represent the average value measured for all the runs within the time interval considered). In addition we performed some classical statistic on un-aggregated data.\\
-In figure ~\ref{fig:run_1_aggregate} ~\ref{fig:run_1_aggregate_noflood} and ~\ref{fig:run_2_aggregate} ~\ref{fig:run_2_aggregate_noflood} are represented delivery ratio and delivery cost of each algorithm during the simulation time (aggregated data).\\
+\subsubsection{Discussion on Results}
+\label{exp_results_discussion}
+
+Simulation results have shown similar motifs with respect to emulation performed in\cite{bubble}, we can observe that social based algorithm have lower delivery cost with respect to classical ones and bubble algorithm has higher delivery ratio with respect to other social based algorithms. See Fugure\ref{fig:reality_emulation} and Figure\ref{fig:run_1_aggregate} for a comparison of original experiment and our simulation results.\\
+However absolute value differences exist if we compare our experimental sessions to the reference one: this discrepancy could be caused by the arbitrary load assumptions performed and the arbitrary time span considered.\\
+In fact in\cite[6.2]{bubble} time span considered is 3 week large ($1814400 sec$), with a presumable node velocity of $1\sim1.5 \frac{m}{sec^{-1}}$, instead simulated experiments range within 7 hours ($\sim 25000 sec$). So the 1000 message of the emulation are spread in a larger time span, with an average ratio of $5.5\cdot 10^{-4} \frac{msgs}{secs}$, while the 100 messages of the simulation are cumulated in a smaller time interval, with average ratio of $4\cdot 10^{-3} \frac{msgs}{secs}$. This mean a more stressed system.\\
+However, as specified in\ref{exp_setup}, we set-up the environment with all message ready to be sent, simulating the dynamics of the system under arbitrary load conditions.\\
+Further simulation parameter tuning can be performed in order to more precisely replicate conditions in\ref{exp_original}: for example a finest set-up of nodes speed (and consequentially to the node movement reaction rate\footnote{Alchemist is based on chemical metaphor, so reactions (conditions and actions) happens with arbitrary rate}) or the rate of the moving decision's reactions should lead to more accurate results. However obtained results are also pretty interesting because they reveal similar algorithms characteristics and led to the same efficiency conclusions.\\
+
+\subsubsection{Experimental Results}
+\label{exp_results_experimental}
+
+Collected data of each experiment's run have been aggregated per time-interval, in other words we made an average of each runs measurement in each time sub-interval (one point on these graphs represent the average value measured for all the runs within the time interval considered). In addition we performed some classical statistic on unaggregated data.\\
+In Figure\ref{fig:run_1_aggregate}\ref{fig:run_1_aggregate_noflood} and Figure\ref{fig:run_2_aggregate}\ref{fig:run_2_aggregate_noflood} are represented delivery ratio and delivery cost of each algorithm during the simulation time (aggregated data).\\
 \newpage
 % Aggregated data session 1
 \begin{center}
 \begin{figure}[h!]
         \centering
     		\includegraphics[scale=0.55]{img/run_1_aggregate.pdf}
-    		\caption{Experimental session n.1 aggregated data}
+    		\caption{Experimental session n.1 aggregated data.\\ The descendent trend of delivery cost and delivery ratio vs. delivery cost is caused by message TTL expiration which begins around t=14000.}
     		\label{fig:run_1_aggregate}
 \end{figure}
 \begin{figure}[h!]
 		\centering
     		\includegraphics[scale=0.55]{img/run_1_aggregate_noflood.pdf}
-    		\caption{Experimental session n.1 aggregated data without flood algorithm}
+    		\caption{Experimental session n.1 aggregated data without flood algorithm.}
     		\label{fig:run_1_aggregate_noflood}
 \end{figure}
 \end{center}
@@ -105,7 +114,7 @@ In figure ~\ref{fig:run_1_aggregate} ~\ref{fig:run_1_aggregate_noflood} and ~\re
 \begin{figure}[h!]
 	\begin{center}
     \includegraphics[scale=0.55]{img/run_2_aggregate.pdf}
-    \caption{Experimental session n.2 aggregated data}
+    \caption{Experimental session n.2 aggregated data.}
     \label{fig:run_2_aggregate}
   \end{center}
 \end{figure}
@@ -113,18 +122,19 @@ In figure ~\ref{fig:run_1_aggregate} ~\ref{fig:run_1_aggregate_noflood} and ~\re
 \begin{figure}[h!]
 	\begin{center}
     \includegraphics[scale=0.55]{img/run_2_aggregate_noflood.pdf}
-    \caption{Experimental session n.2 aggregated data without flood algorithm}
+    \caption{Experimental session n.2 aggregated data without flood algorithm.}
     \label{fig:run_2_aggregate_noflood}
   \end{center}
 \end{figure}
 \newpage
 
-While in figure ~\ref{fig:run_1_gstats} ~\ref{fig:run_2_gstats} are shown statistics about simulation session 1 and 2 subdivided per algorithm, and in ~\ref{fig:run_1_max_delratio} ~\ref{fig:run_2_max_delratio} are represented the distribution of the delivery ration across the runs.
+While in Figure\ref{fig:run_1_gstats}\ref{fig:run_2_gstats} are shown statistics about simulation session 1 and 2 subdivided per algorithm, and in Figure\ref{fig:run_1_max_delratio}\ref{fig:run_2_max_delratio} are represented the histograms of delivery ratio measured in all the experiment's runs.
+
 % Statistics session 1
 \begin{figure}[h!]
 	\begin{center}
     \includegraphics[scale=0.55]{img/run_1_gstats.pdf}
-    \caption{Experimental session n.1 statistics}
+    \caption{Experimental session n.1 statistics.}
     \label{fig:run_1_gstats}
   \end{center}
 \end{figure}
@@ -132,7 +142,7 @@ While in figure ~\ref{fig:run_1_gstats} ~\ref{fig:run_2_gstats} are shown statis
 \begin{figure}[h!]
 	\begin{center}
     \includegraphics[scale=0.55]{img/run_2_gstats.pdf}
-    \caption{Experimental session n.2 statistics}
+    \caption{Experimental session n.2 statistics.}
     \label{fig:run_2_gstats}
   \end{center}
 \end{figure}
@@ -141,7 +151,7 @@ While in figure ~\ref{fig:run_1_gstats} ~\ref{fig:run_2_gstats} are shown statis
 \begin{figure}[h!]
 	\begin{center}
     \includegraphics[scale=0.55]{img/run_1_max_delratio.pdf}
-    \caption{Experimental session n.1 delivery ratio distribution}
+    \caption{Experimental session n.1 delivery ratio distribution.}
     \label{fig:run_1_max_delratio}
   \end{center}
 \end{figure}
@@ -149,7 +159,7 @@ While in figure ~\ref{fig:run_1_gstats} ~\ref{fig:run_2_gstats} are shown statis
 \begin{figure}[h!]
 	\begin{center}
     \includegraphics[scale=0.55]{img/run_2_max_delratio.pdf}
-    \caption{Experimental session n.2 delivery ratio distribution}
+    \caption{Experimental session n.2 delivery ratio distribution.}
     \label{fig:run_2_max_delratio}
   \end{center}
 \end{figure}
